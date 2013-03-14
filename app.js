@@ -6,6 +6,8 @@ Ext.Loader.setPath({
 //</debug>
 
 Ext.application({
+    profiles: ["Phone"],
+
     name: 'AB',
 
     requires: [
