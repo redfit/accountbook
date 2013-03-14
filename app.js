@@ -6,7 +6,7 @@ Ext.Loader.setPath({
 //</debug>
 
 Ext.application({
-    profiles: ["Phone"],
+    profiles: ["Tablet","Phone"],
 
     name: 'AB',
 
