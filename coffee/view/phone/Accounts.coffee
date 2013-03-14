@@ -10,9 +10,7 @@ Ext.define 'AB.view.phone.Accounts',
     layout: 'fit'
 
     items:[
-      {
-        docked: 'top'
-        xtype: 'titlebar'
-        title: '履歴'
-      }
+      docked: 'top'
+      xtype: 'titlebar'
+      title: '履歴'
     ]

@@ -11,13 +11,16 @@ Ext.define "AB.view.phone.Main",
   config:
     tabBarPosition: 'bottom'
 
-    layout:{
+    layout:
       animation: ''
-    }
+
 
     items:[
-      { xtype: 'phonehome' }
-      { xtype: 'phoneform' }
-      { xtype: 'phoneaccounts' }
-      { xtype: 'phonesetting' }
+      xtype: 'phonehome'
+    ,
+      xtype: 'phoneform'
+    ,
+      xtype: 'phoneaccounts'
+    ,
+      xtype: 'phonesetting'
     ]

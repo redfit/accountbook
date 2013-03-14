@@ -10,9 +10,7 @@ Ext.define 'AB.view.phone.Setting',
     layout: 'fit'
 
     items:[
-      {
-        docked: 'top'
-        xtype: 'titlebar'
-        title: '設定'
-      }
+      docked: 'top'
+      xtype: 'titlebar'
+      title: '設定'
     ]

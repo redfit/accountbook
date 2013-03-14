@@ -10,10 +10,8 @@ Ext.define 'AB.view.phone.Home',
     layout: 'fit'
 
     items:[
-      {
-        docked: 'top'
-        xtype: 'titlebar'
-        title: 'ホーム'
-      }
+      docked: 'top'
+      xtype: 'titlebar'
+      title: 'ホーム'
     ]
 

@@ -10,10 +10,8 @@ Ext.define 'AB.view.phone.Form',
     layout: 'fit'
 
     items:[
-      {
-        docked: 'top'
-        xtype: 'titlebar'
-        title: '入力する'
-      }
+      docked: 'top'
+      xtype: 'titlebar'
+      title: '入力する'
     ]
 

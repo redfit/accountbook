@@ -10,6 +10,8 @@ Ext.application({
 
     profiles: ["Tablet","Phone"],
 
+    stores: ['Accounts'],
+
     name: 'AB',
 
     requires: [
