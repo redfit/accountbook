@@ -29,6 +29,9 @@ $tabs-dark: #111;
 @include sencha-msgbox;
 
 // Your custom code goes here...
+@include pictos-iconmask('list');
+@include pictos-iconmask('compose1');
+@include pictos-iconmask('settings9');
 
 .x-toolbar-light .x-title {
     color: #fff;
