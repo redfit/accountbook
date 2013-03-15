@@ -68,13 +68,16 @@ Ext.define('AB.view.account.Form', {
   },
   setup: function() {
     var now, record;
-    now = new Date();
-    record = Ext.create('AB.model.Account', {
-      account: '0',
-      category: '10',
-      recorded: now,
-      memo: ''
-    });
-    return this.setRecord(record);
+    if (!this.editMode) {
+      now = new Date();
+      record = Ext.create('AB.model.Account', {
+        account: '0',
+        category: '10',
+        recorded: now,
+        memo: ''
+      });
+      this.setRecord(record);
+    }
+    return this.editMode = false;
   }
 });

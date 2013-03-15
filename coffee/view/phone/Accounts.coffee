@@ -40,6 +40,13 @@ Ext.define 'AB.view.phone.Accounts',
             ui: 'back'
             text: '戻る'
             itemId: 'backToListButton'
+          ,
+            xtype: 'button'
+            align: 'right'
+            ui: 'flat'
+            itemId: 'actionButton'
+            iconCls: 'action'
+            iconMask: true
           ]
         ,
           xtype: 'accountdetail'
@@ -52,6 +59,14 @@ Ext.define 'AB.view.phone.Accounts',
             console.log('back to list button')
             # </debug>
             this.fireEvent('backtolist')
+        ,
+          delegate: '#actionButton'
+          event: 'tap'
+          fn: ->
+            # <debug>
+            console.log('action button')
+            # </debug>
+            @down('acctountdetail').fireEvent('showaction')
         ]
       ]
     ]

@@ -8,7 +8,8 @@ Ext.define("AB.controller.Accounts", {
       'list': 'accountlist',
       'page': 'phonemain #accountPage',
       'main': 'phonemain',
-      'viewPanel': 'phoneaccounts'
+      'viewPanel': 'phoneaccounts',
+      'editPanel': 'phoneform'
     },
     control: {
       'phonemain #accountDetail': {
@@ -19,20 +20,35 @@ Ext.define("AB.controller.Accounts", {
       },
       'form': {
         'saverecord': 'saveRecord'
+      },
+      'detail': {
+        'showeditform': 'showEditForm',
+        'showaction': 'showAction'
       }
     }
   },
+  showEditForm: function(record) {
+    var me;
+    console.log('show edit form');
+    me = this;
+    me.getForm().setRecord(record);
+    me.getForm().editMode = true;
+    return me.getMain().setActiveItem(me.getEditPanel());
+  },
+  showAction: function() {
+    console.log('show action');
+    return this.getDetail().showActionSheet();
+  },
   showDetail: function(record) {
     var me;
-    console.log('show detail', record);
+    console.log('show detail');
     me = this;
     me.getPage().getLayout().setAnimation({
       type: 'slide',
       direction: 'left'
     });
     me.getDetail().setRecord(record);
-    me.getDetail().up('#accountPage').setActiveItem(1);
-    return me.getMain().setActiveItem(me.getViewPanel());
+    return me.getDetail().up('#accountPage').setActiveItem(1);
   },
   showList: function() {
     var me;

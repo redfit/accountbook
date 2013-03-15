@@ -59,11 +59,12 @@ Ext.define 'AB.view.account.Form',
     ]
 
   setup: ->
-    now = new Date()
-    record = Ext.create 'AB.model.Account',
-      account: '0'
-      category: '10'
-      recorded: now
-      memo: ''
-    @setRecord(record)
-
+    if not @editMode
+      now = new Date()
+      record = Ext.create 'AB.model.Account',
+        account: '0'
+        category: '10'
+        recorded: now
+        memo: ''
+      @setRecord(record)
+    @editMode = false

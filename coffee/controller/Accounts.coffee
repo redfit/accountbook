@@ -8,6 +8,7 @@ Ext.define "AB.controller.Accounts",
       'page': 'phonemain #accountPage'
       'main': 'phonemain'
       'viewPanel': 'phoneaccounts'
+      'editPanel': 'phoneform'
     control:
       'phonemain #accountDetail':
         'backtolist': 'showList'
@@ -17,6 +18,26 @@ Ext.define "AB.controller.Accounts",
 
       'form':
         'saverecord': 'saveRecord'
+
+      'detail':
+        'showeditform': 'showEditForm'
+        'showaction': 'showAction'
+
+  showEditForm: (record)->
+    # <debug>
+    console.log('show edit form')
+    # </debug>
+    me = @
+    me.getForm().setRecord(record)
+    me.getForm().editMode = true
+    me.getMain().setActiveItem(me.getEditPanel())
+
+  showAction: ->
+    # <debug>
+    console.log('show action')
+    # </debug>
+    @getDetail().showActionSheet()
+
 
   showDetail: (record)->
     # <debug>
@@ -30,7 +51,6 @@ Ext.define "AB.controller.Accounts",
     )
     me.getDetail().setRecord(record)
     me.getDetail().up('#accountPage').setActiveItem(1)
-    me.getMain().setActiveItem(me.getViewPanel())
 
   showList: ()->
     # <debug>
