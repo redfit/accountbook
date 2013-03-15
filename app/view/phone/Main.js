@@ -6,7 +6,7 @@ Ext.define("AB.view.phone.Main", {
   config: {
     tabBarPosition: 'bottom',
     layout: {
-      animation: ''
+      animation: 'slide'
     },
     items: [
       {

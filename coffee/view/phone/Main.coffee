@@ -12,7 +12,7 @@ Ext.define "AB.view.phone.Main",
     tabBarPosition: 'bottom'
 
     layout:
-      animation: ''
+      animation: 'slide'
 
 
     items:[
