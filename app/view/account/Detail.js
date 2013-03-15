@@ -1,10 +1,22 @@
 
 Ext.define('AB.view.account.Detail', {
-  extend: 'Ext.Container',
+  extend: 'Ext.form.Panel',
   xtype: 'accountdetail',
-  requires: ['Ext.ActionSheet'],
+  requires: ['Ext.ActionSheet', 'AB.view.account.FieldSet'],
   config: {
-    tpl: ['<div>{recorded}</div>', '<div>{category}</div>', '<div>{account}</div>', '<div>{memo}</div>']
+    items: [
+      {
+        xtype: 'accountfieldset',
+        defaults: {
+          disabled: true,
+          disabledCls: null,
+          component: {
+            disabled: true,
+            disabledCls: null
+          }
+        }
+      }
+    ]
   },
   constructor: function(config) {
     var me;
@@ -37,7 +49,7 @@ Ext.define('AB.view.account.Detail', {
       ]
     });
     Ext.Viewport.add(me.actionSheet);
-    return this;
+    return null;
   },
   showActionSheet: function() {
     return this.actionSheet.show();
