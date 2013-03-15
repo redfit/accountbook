@@ -62,11 +62,14 @@ Ext.define("AB.controller.Accounts", {
     return me.getPage().setActiveItem(0);
   },
   saveRecord: function(record, values) {
-    var store;
+    var id, store;
     console.log('save record in controller', record, values);
     record.setValues(values);
     store = Ext.getStore('Accounts');
-    store.add(record);
+    id = record.get('id');
+    if (Ext.isEmpty(store.findRecord('id', id))) {
+      store.add(record);
+    }
     store.sync();
     return this.showDetail(record);
   },

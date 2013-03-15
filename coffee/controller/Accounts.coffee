@@ -70,7 +70,8 @@ Ext.define "AB.controller.Accounts",
     # </debug>
     record.setValues(values)
     store = Ext.getStore('Accounts')
-    store.add(record)
+    id = record.get('id')
+    store.add(record) if Ext.isEmpty(store.findRecord('id', id))
     store.sync()
     @showDetail(record)
 

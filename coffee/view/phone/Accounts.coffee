@@ -66,7 +66,7 @@ Ext.define 'AB.view.phone.Accounts',
             # <debug>
             console.log('action button')
             # </debug>
-            @down('acctountdetail').fireEvent('showaction')
+            @down('accountdetail').fireEvent('showaction')
         ]
       ]
     ]

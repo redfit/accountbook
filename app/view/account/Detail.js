@@ -3,11 +3,14 @@ Ext.define('AB.view.account.Detail', {
   extend: 'Ext.Container',
   xtype: 'accountdetail',
   requires: ['Ext.ActionSheet'],
+  config: {
+    tpl: ['<div>{recorded}</div>', '<div>{category}</div>', '<div>{account}</div>', '<div>{memo}</div>']
+  },
   constructor: function(config) {
     var me;
     me = this;
     me.callParent(arguments);
-    me.actionSheet = Ext.create("Ext.ActionSheet", Ext.merge({
+    me.actionSheet = Ext.create("Ext.ActionSheet", {
       hidden: true,
       itemId: "actionSheet",
       items: [
@@ -32,16 +35,14 @@ Ext.define('AB.view.account.Detail', {
           }
         }
       ]
-    }, config.actionSheetConfig));
-    return Ext.Viewport.add(me.actionSheet);
+    });
+    Ext.Viewport.add(me.actionSheet);
+    return this;
   },
   showActionSheet: function() {
     return this.actionSheet.show();
   },
   hideActionSheet: function() {
     return this.actionSheet.hide();
-  },
-  config: {
-    tpl: ['<div>{recorded}</div>', '<div>{category}</div>', '<div>{account}</div>', '<div>{memo}</div>']
   }
 });
