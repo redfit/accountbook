@@ -6,12 +6,7 @@ Ext.define('AB.view.account.Form', {
   config: {
     items: [
       {
-        xtype: 'fieldset',
-        items: [
-          {
-            xtype: 'accountfieldset'
-          }
-        ]
+        xtype: 'accountfieldset'
       }, {
         layout: {
           type: 'vbox',
