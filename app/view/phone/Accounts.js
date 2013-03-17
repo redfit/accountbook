@@ -1,11 +1,12 @@
 
 Ext.define('AB.view.phone.Accounts', {
-  extend: 'Ext.Container',
+  extend: 'AB.view.UrlBasedPanel',
   xtype: 'phoneaccounts',
   requires: ['Ext.TitleBar', 'AB.view.account.List', 'AB.view.account.Detail'],
   config: {
     title: '履歴',
     iconCls: 'list',
+    url: 'accounts',
     layout: 'fit',
     items: [
       {

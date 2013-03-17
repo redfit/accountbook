@@ -1,6 +1,6 @@
 
 Ext.define('AB.view.phone.Form', {
-  extend: 'Ext.Container',
+  extend: 'AB.view.UrlBasedPanel',
   xtype: 'phoneform',
   requires: ['Ext.TitleBar', 'AB.view.account.Form'],
   config: {

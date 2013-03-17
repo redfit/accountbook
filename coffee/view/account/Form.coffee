@@ -4,9 +4,6 @@ Ext.define 'AB.view.account.Form',
 
   requires:[
     'Ext.form.FieldSet'
-    'Ext.field.Number'
-    'Ext.field.Select'
-    'Ext.field.DatePicker'
   ]
 
   config:

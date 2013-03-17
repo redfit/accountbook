@@ -1,6 +1,6 @@
 
 Ext.define('AB.view.phone.Home', {
-  extend: 'Ext.Container',
+  extend: 'AB.view.UrlBasedPanel',
   xtype: 'phonehome',
   requires: ['Ext.TitleBar'],
   config: {

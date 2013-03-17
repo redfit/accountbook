@@ -1,68 +1,61 @@
 Ext.define "AB.controller.Accounts",
   extend: "Ext.app.Controller"
   config:
+    routes:
+      'accounts': 'showList'
+      'accounts/new': 'showCreateForm'
+      'accounts/:id': 'showDetail'
+      'accounts/:id/edit': 'showEditForm'
     refs:
       'detail': 'accountdetail'
       'form': 'accountform'
       'list': 'accountlist'
-      'page': 'phonemain #accountPage'
-      'main': 'phonemain'
-      'viewPanel': 'phoneaccounts'
-      'editPanel': 'phoneform'
     control:
-      'phonemain #accountDetail':
-        'backtolist': 'showList'
-
       'accountlist':
-        'recordtap': 'showDetail'
+        'recordtap': 'goDetail'
 
       'form':
         'saverecord': 'saveRecord'
 
       'detail':
-        'showeditform': 'showEditForm'
+        'showeditform': 'goEditForm'
         'showaction': 'showAction'
+        'showdeleteconfirm': 'showDeleteConfirm'
 
-  showEditForm: (record)->
+  showDetail: Ext.emptyFn
+
+  showList: Ext.emptyFn
+
+  showEditForm: Ext.emptyFn
+
+  goList: ()->
+    @redirectTo('accounts')
+
+  goEditForm: (record)->
+    @redirectTo('accounts/' + record.get('id') + '/edit')
+
+  goDetail: (record)->
+    @redirectTo('accounts/' + record.get('id'))
+
+  showDeleteConfirm: (record)->
+    Ext.Msg.confirm('確認','削除してもいいですか？', (btn)->
+      @deleteRecord(record) if btn is 'yes'
+    , @)
+
+  deleteRecord: (record)->
     # <debug>
-    console.log('show edit form')
+    console.log('delete record', record)
     # </debug>
-    me = @
-    me.getForm().setRecord(record)
-    me.getForm().editMode = true
-    me.getMain().setActiveItem(me.getEditPanel())
+    store = Ext.getStore('Accounts')
+    store.remove(record)
+    store.sync()
+    @showList()
 
   showAction: ->
     # <debug>
     console.log('show action')
     # </debug>
     @getDetail().showActionSheet()
-
-
-  showDetail: (record)->
-    # <debug>
-    console.log('show detail')
-    # </debug>
-    me = @
-    # もっと良い書き方は無いものか
-    me.getPage().getLayout().setAnimation(
-        type: 'slide'
-        direction: 'left'
-    )
-    me.getDetail().setRecord(record)
-    me.getDetail().up('#accountPage').setActiveItem(1)
-
-  showList: ()->
-    # <debug>
-    console.log('show list')
-    # </debug>
-    me = @
-    me.getMain().setActiveItem(me.getViewPanel())
-    me.getPage().getLayout().setAnimation(
-        type: 'slide'
-        direction: 'right'
-    )
-    me.getPage().setActiveItem(0)
 
   saveRecord: (record, values)->
     # <debug>
@@ -75,8 +68,15 @@ Ext.define "AB.controller.Accounts",
     store.sync()
     @showDetail(record)
 
+  doWithRecord: (id, fn)->
+    me = @
+    store = Ext.getStore('Accounts')
+    record = store.findRecord('id', id)
+    if (Ext.isEmpty(record))
+       return me.goList()
+
+    fn.call(me, record)
 
 
 
-  #called when the Application is launched, remove if not needed
-  launch: (app) ->
+

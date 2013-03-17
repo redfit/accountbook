@@ -5,7 +5,7 @@ Ext.define("AB.profile.Phone", {
     views: ['Main'],
     models: [],
     stores: [],
-    controllers: []
+    controllers: ['Accounts']
   },
   isActive: function(app) {
     return Ext.os.is.Phone;

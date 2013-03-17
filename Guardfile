@@ -3,9 +3,13 @@
 guard 'coffeescript', :output => 'app/', :bare => true do
   watch(%r{^coffee/(.+)\.coffee$})
 end
+guard 'coffeescript', :output => 'ux/', :bare => true do
+  watch(%r{^uxcoffee/(.+)\.coffee$})
+end
 
 guard 'livereload' do
   watch(%r{^app/(.+)\.js$})
+  watch(%r{^ux/(.+)\.js$})
   watch(%r{^resources/(.+)\.css$})
   watch('app.js')
 end

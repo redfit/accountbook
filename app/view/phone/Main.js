@@ -1,6 +1,6 @@
 
 Ext.define("AB.view.phone.Main", {
-  extend: "Ext.tab.Panel",
+  extend: 'AB.view.UrlBasedTabPanel',
   xtype: 'phonemain',
   requires: ['AB.view.phone.Home', 'AB.view.phone.Form', 'AB.view.phone.Accounts', 'AB.view.phone.Setting'],
   config: {

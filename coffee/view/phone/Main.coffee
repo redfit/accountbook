@@ -1,5 +1,5 @@
 Ext.define "AB.view.phone.Main",
-  extend: "Ext.tab.Panel"
+  extend: 'AB.view.UrlBasedTabPanel'
   xtype: 'phonemain'
   requires: [
     'AB.view.phone.Home'

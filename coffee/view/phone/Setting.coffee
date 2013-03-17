@@ -1,5 +1,5 @@
 Ext.define 'AB.view.phone.Setting',
-  extend: 'Ext.Container'
+  extend: 'AB.view.UrlBasedPanel'
   xtype: 'phonesetting'
 
   requires: ['Ext.TitleBar']
@@ -7,6 +7,7 @@ Ext.define 'AB.view.phone.Setting',
   config:
     title: '設定'
     iconCls: 'settings9'
+    url: 'setting'
     layout: 'fit'
 
     items:[

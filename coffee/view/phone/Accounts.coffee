@@ -1,5 +1,5 @@
 Ext.define 'AB.view.phone.Accounts',
-  extend: 'Ext.Container'
+  extend: 'AB.view.UrlBasedPanel'
   xtype: 'phoneaccounts'
 
   requires: [
@@ -11,6 +11,7 @@ Ext.define 'AB.view.phone.Accounts',
   config:
     title: '履歴'
     iconCls: 'list'
+    url: 'accounts'
     layout: 'fit'
 
     items:[

@@ -2,64 +2,61 @@
 Ext.define("AB.controller.Accounts", {
   extend: "Ext.app.Controller",
   config: {
+    routes: {
+      'accounts': 'showList',
+      'accounts/new': 'showCreateForm',
+      'accounts/:id': 'showDetail',
+      'accounts/:id/edit': 'showEditForm'
+    },
     refs: {
       'detail': 'accountdetail',
       'form': 'accountform',
-      'list': 'accountlist',
-      'page': 'phonemain #accountPage',
-      'main': 'phonemain',
-      'viewPanel': 'phoneaccounts',
-      'editPanel': 'phoneform'
+      'list': 'accountlist'
     },
     control: {
-      'phonemain #accountDetail': {
-        'backtolist': 'showList'
-      },
       'accountlist': {
-        'recordtap': 'showDetail'
+        'recordtap': 'goDetail'
       },
       'form': {
         'saverecord': 'saveRecord'
       },
       'detail': {
-        'showeditform': 'showEditForm',
-        'showaction': 'showAction'
+        'showeditform': 'goEditForm',
+        'showaction': 'showAction',
+        'showdeleteconfirm': 'showDeleteConfirm'
       }
     }
   },
-  showEditForm: function(record) {
-    var me;
-    console.log('show edit form');
-    me = this;
-    me.getForm().setRecord(record);
-    me.getForm().editMode = true;
-    return me.getMain().setActiveItem(me.getEditPanel());
+  showDetail: Ext.emptyFn,
+  showList: Ext.emptyFn,
+  showEditForm: Ext.emptyFn,
+  goList: function() {
+    return this.redirectTo('accounts');
+  },
+  goEditForm: function(record) {
+    return this.redirectTo('accounts/' + record.get('id') + '/edit');
+  },
+  goDetail: function(record) {
+    return this.redirectTo('accounts/' + record.get('id'));
+  },
+  showDeleteConfirm: function(record) {
+    return Ext.Msg.confirm('確認', '削除してもいいですか？', function(btn) {
+      if (btn === 'yes') {
+        return this.deleteRecord(record);
+      }
+    }, this);
+  },
+  deleteRecord: function(record) {
+    var store;
+    console.log('delete record', record);
+    store = Ext.getStore('Accounts');
+    store.remove(record);
+    store.sync();
+    return this.showList();
   },
   showAction: function() {
     console.log('show action');
     return this.getDetail().showActionSheet();
-  },
-  showDetail: function(record) {
-    var me;
-    console.log('show detail');
-    me = this;
-    me.getPage().getLayout().setAnimation({
-      type: 'slide',
-      direction: 'left'
-    });
-    me.getDetail().setRecord(record);
-    return me.getDetail().up('#accountPage').setActiveItem(1);
-  },
-  showList: function() {
-    var me;
-    console.log('show list');
-    me = this;
-    me.getMain().setActiveItem(me.getViewPanel());
-    me.getPage().getLayout().setAnimation({
-      type: 'slide',
-      direction: 'right'
-    });
-    return me.getPage().setActiveItem(0);
   },
   saveRecord: function(record, values) {
     var id, store;
@@ -73,5 +70,14 @@ Ext.define("AB.controller.Accounts", {
     store.sync();
     return this.showDetail(record);
   },
-  launch: function(app) {}
+  doWithRecord: function(id, fn) {
+    var me, record, store;
+    me = this;
+    store = Ext.getStore('Accounts');
+    record = store.findRecord('id', id);
+    if (Ext.isEmpty(record)) {
+      return me.goList();
+    }
+    return fn.call(me, record);
+  }
 });
