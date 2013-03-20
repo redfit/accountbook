@@ -3,7 +3,7 @@ Ext.define("Ext.ux.data.proxy.Dropbox", {
   extend: "Ext.data.proxy.Client",
   alias: "proxy.dropbox",
   config: {
-    key: 'RT9hVH5iMnA=|4j3MAAKk4sQeDCN1M8f2+kRTrO+HwZRUOhL4D+YXNw==',
+    key: '',
     rememberUser: false,
     enablePagingParams: false,
     filePath: "sample.dat"
@@ -11,7 +11,7 @@ Ext.define("Ext.ux.data.proxy.Dropbox", {
   constructor: function(config) {
     var me;
     me = this;
-    me.callParent(arguments_);
+    me.callParent(arguments);
     if (Ext.isEmpty(config.key)) {
       Ext.Logger.error("The Ext.ux.data.proxy.Dropbox needs the encoded API key to access Dropbox.");
     }
@@ -19,7 +19,8 @@ Ext.define("Ext.ux.data.proxy.Dropbox", {
       key: config.key,
       sandbox: true
     });
-    return me.auth();
+    me.auth();
+    return this;
   },
   create: function(operation, callback, scope) {
     var me, path, records;
@@ -33,9 +34,9 @@ Ext.define("Ext.ux.data.proxy.Dropbox", {
   read: function(operation, callback, scope) {
     var me, onDataRead, path;
     onDataRead = function(success, data) {
-      var Model, collection, filters, limit, reader, records, resultSet, sorters, start;
+      var collection, filters, limit, model, reader, records, resultSet, sorters, start;
       reader = me.getReader();
-      Model = me.getModel();
+      model = me.getModel();
       sorters = operation.getSorters();
       filters = operation.getFilters();
       start = operation.getStart();
@@ -43,6 +44,9 @@ Ext.define("Ext.ux.data.proxy.Dropbox", {
       resultSet = void 0;
       records = void 0;
       collection = void 0;
+      console.log('success', success);
+      console.log('data', data);
+      console.log('reader', reader);
       try {
         resultSet = reader.read(data);
       } catch (e) {

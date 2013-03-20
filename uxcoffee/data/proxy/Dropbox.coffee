@@ -4,14 +4,14 @@ Ext.define "Ext.ux.data.proxy.Dropbox",
   extend: "Ext.data.proxy.Client"
   alias: "proxy.dropbox"
   config:
-    key: 'RT9hVH5iMnA=|4j3MAAKk4sQeDCN1M8f2+kRTrO+HwZRUOhL4D+YXNw=='
+    key: ''
     rememberUser: false
     enablePagingParams: false
     filePath: "sample.dat"
 
   constructor: (config) ->
     me = this
-    me.callParent arguments_
+    me.callParent arguments
 
     #<debug>
     Ext.Logger.error "The Ext.ux.data.proxy.Dropbox needs the encoded API key to access Dropbox."  if Ext.isEmpty(config.key)
@@ -24,6 +24,7 @@ Ext.define "Ext.ux.data.proxy.Dropbox",
 
     #TODO Change timing to auth
     me.auth()
+    @
 
   create: (operation, callback, scope) ->
     console.log "create"
@@ -36,7 +37,7 @@ Ext.define "Ext.ux.data.proxy.Dropbox",
   read: (operation, callback, scope) ->
     onDataRead = (success, data) ->
       reader = me.getReader()
-      Model = me.getModel()
+      model = me.getModel()
       sorters = operation.getSorters()
       filters = operation.getFilters()
       start = operation.getStart()
@@ -44,6 +45,9 @@ Ext.define "Ext.ux.data.proxy.Dropbox",
       resultSet = undefined
       records = undefined
       collection = undefined
+      console.log 'success', success
+      console.log 'data', data
+      console.log 'reader', reader
       try
         resultSet = reader.read(data)
       catch e
@@ -69,6 +73,7 @@ Ext.define "Ext.ux.data.proxy.Dropbox",
       resultSet.setRecords records
       operation.setRecords records
       callback.call scope or me, operation  if typeof callback is "function"
+
     console.log "read"
     me = this
     path = me.selectFilePath()
